@@ -33,7 +33,7 @@ export default function AdminDashboard() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "admin123";
+    const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "BlueSky67";
     if (password === adminPass) {
       setAuthenticated(true);
     } else {
