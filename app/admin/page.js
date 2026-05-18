@@ -265,7 +265,8 @@ export default function AdminDashboard() {
                             gap: '4px',
                             background: 'rgba(114, 146, 201, 0.08)',
                             padding: '2px 8px',
-                            borderRadius: '6px'
+                            borderRadius: '6px',
+                            whiteSpace: 'nowrap'
                           }}>
                             🛠️ Claimed by {req.claimedBy}
                           </span>
