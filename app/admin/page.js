@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { db } from "@/lib/firebase";
 import { collection, query, orderBy, onSnapshot, doc, updateDoc, serverTimestamp } from "firebase/firestore";
 
@@ -249,80 +249,186 @@ export default function AdminDashboard() {
             </thead>
             <tbody>
               {filteredRequests.map((req) => (
-                <tr key={req.id} className={req.status === 'Resolved' ? 'completed-row' : ''} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', transition: 'all 0.2s' }}>
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ fontWeight: 'bold', fontSize: '15px' }}>{req.equipment}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{req.model || 'No model specified'}</div>
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ fontWeight: '600', color: 'var(--accent)' }}>{req.name}</div>
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ fontWeight: '500' }}>{req.location}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Room {req.room}</div>
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ fontWeight: '500', fontSize: '13px' }} title={getFullDate(req.createdAt)}>
-                      {getTimeOpen(req.createdAt)}
-                    </div>
-                    {req.status === 'Resolved' && (
-                      <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                        Resolved: {getResolvedDate(req.resolvedAt)}
-                      </div>
-                    )}
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <span style={{ 
-                      color: req.urgency === 'High' ? '#ff4d4d' : req.urgency === 'Medium' ? '#ffd43b' : '#40c057',
-                      fontWeight: 'bold',
-                      fontSize: '13px'
-                    }}>
-                      {req.urgency === 'High' ? '🔴' : req.urgency === 'Medium' ? '🟡' : '🟢'} {req.urgency}
-                    </span>
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <span className={`status-badge status-${req.status === 'In Progress' ? 'progress' : req.status.toLowerCase()}`}>
-                      {req.status}
-                    </span>
-                  </td>
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      {req.status !== 'Resolved' && (
-                        <>
-                          <button 
-                            className="action-button action-resolve" 
-                            title="Mark as Resolved"
-                            onClick={() => updateStatus(req.id, 'Resolved')}
-                          >
-                            ✅ Resolve
-                          </button>
-                          {req.status === 'Pending' && (
-                            <button 
-                              className="action-button" 
-                              onClick={() => updateStatus(req.id, 'In Progress')}
-                            >
-                              ⚙️ Start
-                            </button>
+                <Fragment key={req.id}>
+                  <tr className={req.status === 'Resolved' ? 'completed-row' : ''} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', transition: 'all 0.2s' }}>
+                    <td style={{ padding: '20px' }}>
+                      <div style={{ fontWeight: 'bold', fontSize: '15px' }}>{req.equipment}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{req.model || 'No model specified'}</div>
+                      {req.claimedBy && (
+                        <div style={{ marginTop: '8px' }}>
+                          <span style={{ 
+                            fontSize: '11px', 
+                            fontWeight: '600', 
+                            color: 'var(--accent)', 
+                            display: 'inline-flex', 
+                            alignItems: 'center', 
+                            gap: '4px',
+                            background: 'rgba(114, 146, 201, 0.08)',
+                            padding: '2px 8px',
+                            borderRadius: '6px'
+                          }}>
+                            🛠️ Claimed by {req.claimedBy}
+                          </span>
+                          {req.caseDetails && (
+                            <div style={{ 
+                              fontSize: '11px', 
+                              color: 'var(--text-muted)', 
+                              background: 'rgba(255,255,255,0.02)', 
+                              padding: '6px 10px', 
+                              borderRadius: '8px', 
+                              borderLeft: '2px solid var(--accent)',
+                              marginTop: '4px',
+                              maxWidth: '300px',
+                              whiteSpace: 'pre-wrap'
+                            }}>
+                              {req.caseDetails}
+                            </div>
                           )}
-                        </>
+                        </div>
                       )}
-                      {req.imageUrl && (
-                        <a href={req.imageUrl} target="_blank" className="action-button" style={{ textDecoration: 'none' }}>
-                          🖼️ Photo
-                        </a>
-                      )}
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <div style={{ fontWeight: '600', color: 'var(--accent)' }}>{req.name}</div>
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <div style={{ fontWeight: '500' }}>{req.location}</div>
+                      <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Room {req.room}</div>
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <div style={{ fontWeight: '500', fontSize: '13px' }} title={getFullDate(req.createdAt)}>
+                        {getTimeOpen(req.createdAt)}
+                      </div>
                       {req.status === 'Resolved' && (
-                        <button 
-                          className="action-button" 
-                          style={{ opacity: 0.5 }}
-                          onClick={() => updateStatus(req.id, 'Pending')}
-                        >
-                          ↩️ Reopen
-                        </button>
+                        <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                          Resolved: {getResolvedDate(req.resolvedAt)}
+                        </div>
                       )}
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <span style={{ 
+                        color: req.urgency === 'High' ? '#ff4d4d' : req.urgency === 'Medium' ? '#ffd43b' : '#40c057',
+                        fontWeight: 'bold',
+                        fontSize: '13px'
+                      }}>
+                        {req.urgency === 'High' ? '🔴' : req.urgency === 'Medium' ? '🟡' : '🟢'} {req.urgency}
+                      </span>
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <span className={`status-badge status-${req.status === 'In Progress' ? 'progress' : req.status.toLowerCase()}`}>
+                        {req.status}
+                      </span>
+                    </td>
+                    <td style={{ padding: '20px' }}>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {req.status !== 'Resolved' && (
+                          <>
+                            <button 
+                              className="action-button action-resolve" 
+                              title="Mark as Resolved"
+                              onClick={() => updateStatus(req.id, 'Resolved')}
+                            >
+                              ✅ Resolve
+                            </button>
+                            {req.status === 'Pending' && !req.claimedBy && (
+                              <button 
+                                className="action-button" 
+                                style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
+                                onClick={() => {
+                                  setClaimingId(req.id);
+                                  setCaseDetails("");
+                                }}
+                              >
+                                ⚙️ Claim
+                              </button>
+                            )}
+                            {req.claimedBy && (
+                              <button 
+                                className="action-button" 
+                                onClick={() => {
+                                  setClaimingId(req.id);
+                                  setCaseDetails(req.caseDetails || "");
+                                  setClaimerName(req.claimedBy || "");
+                                }}
+                              >
+                                📝 Edit Notes
+                              </button>
+                            )}
+                          </>
+                        )}
+                        {req.imageUrl && (
+                          <a href={req.imageUrl} target="_blank" className="action-button" style={{ textDecoration: 'none' }}>
+                            🖼️ Photo
+                          </a>
+                        )}
+                        {req.status === 'Resolved' && (
+                          <button 
+                            className="action-button" 
+                            style={{ opacity: 0.5 }}
+                            onClick={() => updateStatus(req.id, 'Pending')}
+                          >
+                            ↩️ Reopen
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                  {claimingId === req.id && (
+                    <tr style={{ background: 'rgba(114, 146, 201, 0.03)' }}>
+                      <td colSpan={7} style={{ padding: '15px 20px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ 
+                          background: 'rgba(255, 255, 255, 0.02)', 
+                          border: '1px dashed var(--accent)', 
+                          borderRadius: '16px', 
+                          padding: '20px',
+                          maxWidth: '600px',
+                          boxShadow: '0 8px 32px 0 rgba(0,0,0,0.2)'
+                        }}>
+                          <h4 style={{ color: 'var(--accent)', marginBottom: '12px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'Outfit, sans-serif' }}>
+                            🛠️ {req.claimedBy ? "Edit Claim Details" : "Claim & Update Case Details"}
+                          </h4>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            <div>
+                              <label style={{ display: 'block', fontSize: '10px', color: 'var(--text-muted)', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>Your Name</label>
+                              <input 
+                                className="glass-input" 
+                                style={{ width: '100%', padding: '8px 12px', fontSize: '13px' }} 
+                                placeholder="Who is claiming this request?"
+                                value={claimerName}
+                                onChange={(e) => setClaimerName(e.target.value)}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ display: 'block', fontSize: '10px', color: 'var(--text-muted)', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>Case Details / Action Plan</label>
+                              <textarea 
+                                className="glass-input" 
+                                style={{ width: '100%', padding: '8px 12px', fontSize: '13px', fontFamily: 'inherit', minHeight: '80px', resize: 'vertical' }} 
+                                placeholder="What is your plan or progress? (e.g. Ordered replacement bulb, arriving Tuesday)"
+                                value={caseDetails}
+                                onChange={(e) => setCaseDetails(e.target.value)}
+                              />
+                            </div>
+                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                              <button 
+                                className="action-button" 
+                                style={{ padding: '6px 16px' }}
+                                onClick={() => setClaimingId(null)}
+                              >
+                                Cancel
+                              </button>
+                              <button 
+                                className="primary-button" 
+                                style={{ padding: '6px 20px', borderRadius: '8px', fontSize: '12px' }}
+                                onClick={() => handleConfirmClaim(req.id)}
+                              >
+                                Confirm Claim
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
               ))}
             </tbody>
           </table>
