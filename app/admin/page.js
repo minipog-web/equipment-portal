@@ -11,6 +11,16 @@ export default function AdminDashboard() {
   const [filter, setFilter] = useState("Open");
   const [password, setPassword] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [claimingId, setClaimingId] = useState(null);
+  const [claimerName, setClaimerName] = useState("");
+  const [caseDetails, setCaseDetails] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedName = localStorage.getItem("claimerName");
+      if (savedName) setClaimerName(savedName);
+    }
+  }, []);
 
   useEffect(() => {
     if (!authenticated) return;
@@ -48,6 +58,32 @@ export default function AdminDashboard() {
       updates.resolvedAt = serverTimestamp();
     }
     await updateDoc(docRef, updates);
+  };
+
+  const handleConfirmClaim = async (id) => {
+    if (!claimerName.trim()) {
+      alert("Please enter your name to claim this request.");
+      return;
+    }
+    
+    const docRef = doc(db, "requests", id);
+    const updates = {
+      status: "In Progress",
+      claimedBy: claimerName.trim(),
+      caseDetails: caseDetails.trim(),
+      claimedAt: serverTimestamp()
+    };
+    
+    try {
+      await updateDoc(docRef, updates);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("claimerName", claimerName.trim());
+      }
+      setClaimingId(null);
+    } catch (err) {
+      console.error("Error claiming request:", err);
+      alert("Failed to claim request. Please try again.");
+    }
   };
 
   const openRequests = requests.filter(r => r.status === "Pending" || r.status === "In Progress");
