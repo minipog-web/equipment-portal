@@ -329,7 +329,7 @@ export default function AdminDashboard() {
                             >
                               ✅ Resolve
                             </button>
-                            {req.status === 'Pending' && !req.claimedBy && (
+                            {!req.claimedBy && (
                               <button 
                                 className="action-button" 
                                 style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
