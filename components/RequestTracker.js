@@ -46,24 +46,24 @@ export default function RequestTracker() {
     switch (status) {
       case "Pending":
         return {
-          color: "#fbbf24",
-          borderColor: "rgba(251, 191, 36, 0.3)",
-          bg: "rgba(251, 191, 36, 0.06)",
-          shadow: "0 0 10px rgba(251, 191, 36, 0.15)"
+          color: "#ff6b00",
+          borderColor: "rgba(255, 107, 0, 0.3)",
+          bg: "rgba(255, 107, 0, 0.04)",
+          shadow: "none"
         };
       case "In Progress":
         return {
-          color: "#06b6d4",
-          borderColor: "rgba(6, 182, 212, 0.3)",
-          bg: "rgba(6, 182, 212, 0.06)",
-          shadow: "0 0 10px rgba(6, 182, 212, 0.15)"
+          color: "#00ff66",
+          borderColor: "rgba(0, 255, 102, 0.3)",
+          bg: "rgba(0, 255, 102, 0.04)",
+          shadow: "none"
         };
       case "Resolved":
         return {
-          color: "#10b981",
-          borderColor: "rgba(16, 185, 129, 0.3)",
-          bg: "rgba(16, 185, 129, 0.06)",
-          shadow: "0 0 10px rgba(16, 185, 129, 0.15)"
+          color: "var(--text-muted)",
+          borderColor: "var(--glass-border)",
+          bg: "rgba(255, 255, 255, 0.02)",
+          shadow: "none"
         };
       default:
         return {
@@ -138,13 +138,13 @@ export default function RequestTracker() {
                   <div className="tracker-item-top">
                     <div>
                       <h4 className="tracker-item-name">
-                        {req.equipment} {req.model && <span className="tracker-item-model">({req.model})</span>}
+                        {req.equipment} {req.model && <span className="tracker-item-model diagnostic-mono">({req.model})</span>}
                       </h4>
-                      <p className="tracker-item-location">{req.location} (Room {req.room})</p>
+                      <p className="tracker-item-location">{req.location} (<span className="diagnostic-mono">ROOM {req.room}</span>)</p>
                     </div>
 
                     <div className="tracker-item-meta">
-                      <span className="tracker-item-time">{getTimeAgo(req.createdAt)}</span>
+                      <span className="tracker-item-time diagnostic-mono">{getTimeAgo(req.createdAt)}</span>
                       <span
                         className="tracker-status-badge"
                         style={{
@@ -163,7 +163,7 @@ export default function RequestTracker() {
                     <div className="tracker-detail-row">
                       <span className="tracker-detail-icon">👤</span>
                       {req.claimedBy ? (
-                        <span className="tracker-assigned">Assigned Tech: <strong style={{ color: 'white' }}>{req.claimedBy}</strong></span>
+                        <span className="tracker-assigned">Assigned Tech: <strong style={{ color: 'white' }} className="diagnostic-mono">{req.claimedBy}</strong></span>
                       ) : (
                         <span className="tracker-unassigned">Awaiting technical dispatch</span>
                       )}
