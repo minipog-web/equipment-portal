@@ -25,11 +25,12 @@
 }
 
 body {
-  background-color: var(--bg-gradient);
+  background-color: #06070a;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.005) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.005) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(45deg, #0b0d13 25%, transparent 25%, transparent 75%, #0b0d13 75%, #0b0d13),
+    linear-gradient(45deg, #0b0d13 25%, #06070a 25%, #06070a 75%, #0b0d13 75%, #0b0d13);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
   color: var(--text-main);
   min-height: 100vh;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -45,11 +46,7 @@ body {
 
 /* Double-Bezel Component Enclosures - Industrial Console Style */
 .double-bezel-outer {
-  background: 
-    linear-gradient(45deg, #12141c 25%, transparent 25%, transparent 75%, #12141c 75%, #12141c),
-    linear-gradient(45deg, #12141c 25%, #07080b 25%, #07080b 75%, #12141c 75%, #12141c);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px;
+  background: #090a0d;
   border: 1.5px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 6px;
