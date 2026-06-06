@@ -26,7 +26,7 @@ export async function POST(request) {
     // 3. Submit to Netlify in the background
     console.log("Submitting to Netlify Form Bridge...");
     
-    const response = await fetch(`${origin}/`, {
+    const response = await fetch(`${origin}/__forms.html`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

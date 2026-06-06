@@ -1,0 +1,318 @@
+<style>
+  .mockup-header-state1 {
+    background: rgba(114, 146, 201, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mockup-header-state2 {
+    background: rgba(64, 192, 87, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .state1-label {
+    background: var(--accent);
+    color: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+  }
+  .state2-label {
+    background: #40c057;
+    color: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+  }
+  .mockup-body-box {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 0 0 16px 16px;
+  }
+  .table-wrapper {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.01);
+  }
+  .mock-thead {
+    display: flex;
+    padding: 12px;
+    background: rgba(255,255,255,0.02);
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+  }
+  .col-2 {
+    flex: 2;
+  }
+  .col-1 {
+    flex: 1;
+  }
+  .col-1-5 {
+    flex: 1.5;
+  }
+  .col-2-5 {
+    flex: 2.5;
+  }
+  .mock-row {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .mock-row-grid {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .eq-title {
+    font-weight: bold;
+    color: #fff;
+  }
+  .eq-sub {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .urgency-high {
+    color: #ff4d4d;
+    font-weight: bold;
+  }
+  .pending-badge {
+    font-size: 9px;
+    padding: 1px 6px;
+  }
+  .expansion-box {
+    background: rgba(114, 146, 201, 0.05);
+    border: 1px dashed rgba(114, 146, 201, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  .expansion-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .flex-column-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .input-label {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .input-text {
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+  }
+  .input-textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    height: 60px;
+    resize: none;
+  }
+  .flex-row-gap-end {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 5px;
+  }
+  .btn-cancel {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+  }
+  .btn-confirm {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 11px;
+    background: var(--accent);
+    color: #0f172a;
+    font-weight: bold;
+  }
+  .mock-row-grid-start {
+    display: flex;
+    font-size: 13px;
+    align-items: flex-start;
+  }
+  .margin-bottom-6 {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+  }
+  .margin-bottom-4 {
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .flex-column-gap-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .claimed-header {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .claimed-notes {
+    font-size: 11px;
+    color: #94a3b8;
+    background: rgba(255,255,255,0.03);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+    margin-top: 2px;
+  }
+  .flex-row-gap-6 {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .btn-edit {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+  }
+  .btn-resolve {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    background: rgba(64, 192, 87, 0.1);
+    color: #40c057;
+    border: 1px solid rgba(64, 192, 87, 0.2);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .footer-note {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .footer-p {
+    color: #94a3b8;
+    font-size: 13px;
+  }
+</style>
+
+<h2>Option A with Case Details</h2>
+<p class="subtitle">Here is a mockup of the inline claim form and how case details are entered and displayed.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header mockup-header-state1">
+      <span>State 1: Claiming Request Inline</span>
+      <span class="label state1-label">Active Form</span>
+    </div>
+    <div class="mockup-body mockup-body-box">
+      <div class="table-wrapper">
+        <!-- Table Row Header representation -->
+        <div class="mock-thead">
+          <div class="col-2">Equipment</div>
+          <div class="col-1">Urgency</div>
+          <div class="col-2">Claim Form</div>
+        </div>
+        <!-- Table Row Content -->
+        <div class="mock-row">
+          <div class="mock-row-grid">
+            <div class="col-2">
+              <div class="eq-title">Keratometer</div>
+              <div class="eq-sub">Nidek KM-500</div>
+            </div>
+            <div class="col-1 urgency-high">🔴 High</div>
+            <div class="col-2 pending-badge">
+              <span class="status-badge status-pending">Pending</span>
+            </div>
+          </div>
+          
+          <!-- Inline Expansion Box -->
+          <div class="expansion-box">
+            <div class="expansion-title">
+              🛠️ Claim & Update Case Details
+            </div>
+            <div class="flex-column-gap">
+              <div>
+                <label class="input-label">Your Name</label>
+                <input class="glass-input input-text" placeholder="e.g. Adam" value="Adam" />
+              </div>
+              <div>
+                <label class="input-label">Case Details / Action Plan</label>
+                <textarea class="glass-input input-textarea" placeholder="What are you doing to fix this? (e.g. Ordered replacement bulb, arriving Tuesday)"></textarea>
+              </div>
+              <div class="flex-row-gap-end">
+                <button class="btn-cancel">Cancel</button>
+                <button class="primary-button btn-confirm">Confirm Claim</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header mockup-header-state2">
+      <span>State 2: Claimed Request with Case Details</span>
+      <span class="label state2-label">Active Claim</span>
+    </div>
+    <div class="mockup-body mockup-body-box">
+      <div class="table-wrapper">
+        <!-- Table Row Header representation -->
+        <div class="mock-thead">
+          <div class="col-2">Equipment</div>
+          <div class="col-1-5">Urgency & Status</div>
+          <div class="col-2-5">Claim Details & Actions</div>
+        </div>
+        <!-- Table Row Content -->
+        <div class="mock-row">
+          <div class="mock-row-grid-start">
+            <div class="col-2">
+              <div class="eq-title">Keratometer</div>
+              <div class="margin-bottom-6">Nidek KM-500</div>
+            </div>
+            
+            <div class="col-1-5">
+              <div class="margin-bottom-4">🔴 High</div>
+              <span class="status-badge status-progress">In Progress</span>
+            </div>
+            
+            <div class="col-2-5 flex-column-gap-4">
+              <div class="claimed-header">🛠️ Claimed by Adam</div>
+              <div class="claimed-notes">
+                "Ordered new bulb, arriving Tuesday from Medline."
+              </div>
+              <div class="flex-row-gap-6">
+                <button class="btn-edit">📝 Edit Details</button>
+                <button class="btn-resolve">✅ Resolve</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  <p class="footer-p">Does this layout and interaction match what you are looking for?</p>
+</div>

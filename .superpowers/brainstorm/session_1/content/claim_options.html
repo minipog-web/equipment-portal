@@ -1,0 +1,139 @@
+<style>
+  .section-wrapper {
+    margin-top: 40px;
+  }
+  .mockup-box {
+    margin-top: 15px;
+  }
+  .mockup-body-box {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .table-el {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f8fafc;
+  }
+  .table-thead-tr {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+  .th-padding {
+    padding: 10px;
+  }
+  .table-tbody-tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .td-padding {
+    padding: 12px 10px;
+  }
+  .eq-bold {
+    font-weight: bold;
+  }
+  .eq-sub-txt {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .urgency-col {
+    padding: 12px 10px;
+    color: #ff4d4d;
+    font-weight: bold;
+  }
+  .badge-in-progress {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    background: rgba(114, 146, 201, 0.1);
+    color: #7292c9;
+    border: 1px solid rgba(114, 146, 201, 0.2);
+  }
+  .claimed-user {
+    font-weight: 600;
+    color: #7292c9;
+  }
+  .claimed-time {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .btn-resolve-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    background: rgba(64, 192, 87, 0.1);
+    color: #40c057;
+    border: 1px solid rgba(64, 192, 87, 0.2);
+    cursor: pointer;
+  }
+</style>
+
+<h2>How should the 'Claim' feature work?</h2>
+<p class="subtitle">Select the option that best fits the desired workflow for Marano Eye Care Admin.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Inline Text Input</h3>
+      <p>Clicking "⚙️ Claim" on a request row opens a small inline text input right inside the table row. The user types their name and hits "Confirm" to immediately set their claim.</p>
+    </div>
+  </div>
+  
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Staff Dropdown Selection</h3>
+      <p>Clicking "⚙️ Claim" opens a dropdown of common staff members (e.g., Adam, Veronica, Staff) plus an "Other" option. Simplifies claiming by removing manual typing for common users.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Modal Overlay Dialog</h3>
+      <p>Clicking "⚙️ Claim" opens a centered modal dialog overlay, containing the equipment details, a technician name field, and an optional notes field (e.g. "Arriving in 10 minutes").</p>
+    </div>
+  </div>
+</div>
+
+<div class="section section-wrapper">
+  <h3>How it will look in the table:</h3>
+  <div class="mockup mockup-box">
+    <div class="mockup-header">Preview: Claimed Request Table Row</div>
+    <div class="mockup-body mockup-body-box">
+      <table class="table-el">
+        <thead>
+          <tr class="table-thead-tr">
+            <th class="th-padding">EQUIPMENT</th>
+            <th class="th-padding">URGENCY</th>
+            <th class="th-padding">STATUS</th>
+            <th class="th-padding">CLAIMED BY</th>
+            <th class="th-padding">ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-tbody-tr">
+            <td class="td-padding">
+              <div class="eq-bold">Keratometer</div>
+              <div class="eq-sub-txt">Nidek KM-500</div>
+            </td>
+            <td class="urgency-col">🔴 High</td>
+            <td class="td-padding">
+              <span class="badge-in-progress">IN PROGRESS</span>
+            </td>
+            <td class="td-padding">
+              <div class="claimed-user">🛠️ Adam</div>
+              <div class="claimed-time">Claimed: 2m ago</div>
+            </td>
+            <td class="td-padding">
+              <button class="btn-resolve-badge">✅ Resolve</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

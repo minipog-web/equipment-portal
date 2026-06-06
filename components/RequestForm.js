@@ -99,30 +99,28 @@ export default function RequestForm() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div className="form-wrapper">
       <AnimatePresence mode="wait">
         {status === "success" ? (
-          <motion.div 
+          <motion.div
             key="success"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            className="glass-card" 
-            style={{ padding: '60px 40px', textAlign: 'center' }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            className="glass-card form-success-card"
           >
-            <motion.div 
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", damping: 10, stiffness: 100, delay: 0.2 }}
-              style={{ fontSize: '80px', marginBottom: '20px' }}
+            <motion.div
+              initial={{ scale: 0, rotate: -20 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: "spring", damping: 12, stiffness: 120, delay: 0.2 }}
+              className="form-success-icon"
             >
-              ✅
+              ✓
             </motion.div>
-            <h2 style={{ fontFamily: 'Outfit, sans-serif', marginBottom: '16px', fontSize: '2rem' }}>Request Submitted</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Thank you. Adam will review your request shortly.</p>
-            <button 
-              className="primary-button" 
-              style={{ marginTop: '40px' }}
+            <h2 className="form-success-title">Request Submitted</h2>
+            <p className="form-success-subtitle">Thank you. We will review your request shortly.</p>
+            <button
+              className="primary-button form-success-btn"
               onClick={() => {
                 setFormData({ name: "", location: "Livingston", room: "", equipment: "", model: "", urgency: "Medium" });
                 setImage(null);
@@ -130,30 +128,29 @@ export default function RequestForm() {
                 setStatus("idle");
               }}
             >
-              Send Another
+              Send Another Request
             </button>
           </motion.div>
         ) : (
-          <motion.form 
+          <motion.form
             key="form"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="glass-card" 
-            style={{ padding: '40px', width: '100%' }} 
+            exit={{ opacity: 0, y: -15 }}
+            className="glass-card form-card"
             onSubmit={handleSubmit}
           >
-            <h2 style={{ fontFamily: 'Outfit, sans-serif', marginBottom: '8px', fontSize: '1.8rem' }}>Marano Eye Care Portal</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '32px', fontSize: '14px' }}>
-              Equipment supply and maintenance reporting system.
-            </p>
+            <h2 className="form-title">Marano Eye Care Portal</h2>
+            <p className="form-subtitle">Equipment supply and maintenance reporting system.</p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="form-divider" />
+
+            <div className="form-fields">
               <div className="field-group">
-                <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your Name</label>
-                <input 
-                  className="glass-input" 
-                  style={{ width: '100%' }} 
+                <label htmlFor="name-input" className="field-label">Your Name</label>
+                <input
+                  id="name-input"
+                  className="glass-input field-full"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -161,12 +158,12 @@ export default function RequestForm() {
                 />
               </div>
 
-              <div style={{ display: 'flex', gap: '20px' }}>
-                <div style={{ flex: 1.5 }}>
-                  <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Office Location</label>
-                  <select 
-                    className="glass-input" 
-                    style={{ width: '100%', appearance: 'none' }}
+              <div className="field-row">
+                <div className="field-col-wide">
+                  <label htmlFor="location-select" className="field-label">Office Location</label>
+                  <select
+                    id="location-select"
+                    className="glass-input select-full"
                     value={formData.location}
                     onChange={(e) => setFormData({...formData, location: e.target.value})}
                   >
@@ -174,12 +171,13 @@ export default function RequestForm() {
                     <option value="Denville">Denville</option>
                     <option value="Newark">Newark</option>
                   </select>
+                  <div className="select-arrow">▼</div>
                 </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Room #</label>
-                  <input 
-                    className="glass-input" 
-                    style={{ width: '100%' }} 
+                <div className="field-col-narrow">
+                  <label htmlFor="room-input" className="field-label">Room #</label>
+                  <input
+                    id="room-input"
+                    className="glass-input field-full"
                     required
                     value={formData.room}
                     onChange={(e) => setFormData({...formData, room: e.target.value})}
@@ -189,10 +187,10 @@ export default function RequestForm() {
               </div>
 
               <div className="field-group">
-                <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Equipment Name</label>
-                <input 
-                  className="glass-input" 
-                  style={{ width: '100%' }} 
+                <label htmlFor="equipment-input" className="field-label">Equipment Name</label>
+                <input
+                  id="equipment-input"
+                  className="glass-input field-full"
                   required
                   value={formData.equipment}
                   onChange={(e) => setFormData({...formData, equipment: e.target.value})}
@@ -201,10 +199,10 @@ export default function RequestForm() {
               </div>
 
               <div className="field-group">
-                <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Make / Model / Serial #</label>
-                <input 
-                  className="glass-input" 
-                  style={{ width: '100%' }} 
+                <label htmlFor="model-input" className="field-label">Make / Model / Serial #</label>
+                <input
+                  id="model-input"
+                  className="glass-input field-full"
                   value={formData.model}
                   onChange={(e) => setFormData({...formData, model: e.target.value})}
                   placeholder="Help us identify the exact item"
@@ -212,97 +210,70 @@ export default function RequestForm() {
               </div>
 
               <div className="field-group">
-                <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Urgency</label>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  {["Low", "Medium", "High"].map((level) => (
-                    <button
-                      key={level}
-                      type="button"
-                      className="glass-input"
-                      style={{ 
-                        flex: 1, 
-                        cursor: 'pointer',
-                        borderColor: formData.urgency === level ? 'var(--accent)' : 'var(--glass-border)',
-                        background: formData.urgency === level ? 'rgba(77, 171, 247, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                        color: formData.urgency === level ? 'var(--accent)' : 'white',
-                        fontWeight: formData.urgency === level ? '600' : '400',
-                        boxShadow: formData.urgency === level ? '0 0 15px rgba(77, 171, 247, 0.2)' : 'none',
-                      }}
-                      onClick={() => setFormData({...formData, urgency: level})}
-                    >
-                      {level}
-                    </button>
-                  ))}
+                <label className="field-label">Urgency</label>
+                <div className="urgency-row">
+                  {["Low", "Medium", "High"].map((level) => {
+                    const isActive = formData.urgency === level;
+                    const activeClass = isActive ? `urgency-btn-${level.toLowerCase()}` : "urgency-btn-inactive";
+                    return (
+                      <button
+                        key={level}
+                        type="button"
+                        aria-label={`Set urgency to ${level}`}
+                        aria-pressed={isActive}
+                        className={`glass-input urgency-btn ${activeClass}`}
+                        onClick={() => setFormData({...formData, urgency: level})}
+                      >
+                        {level}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
               <div className="field-group">
-                <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Photo (Optional)</label>
-                <div 
-                  style={{ 
-                    border: '2px dashed var(--glass-border)', 
-                    borderRadius: '16px', 
-                    padding: '24px', 
-                    textAlign: 'center',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    background: 'rgba(255,255,255,0.02)',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
+                <label htmlFor="photo-input" className="field-label">Photo (Optional)</label>
+                <div className="photo-upload-zone">
                   {preview ? (
-                    <div style={{ position: 'relative', display: 'inline-block' }}>
-                      <img src={preview} alt="Preview" style={{ maxWidth: '100%', maxHeight: '180px', borderRadius: '12px', display: 'block' }} />
-                      <div 
+                    <div className="photo-preview-wrapper">
+                      <img src={preview} alt="Preview" className="photo-preview-img" />
+                      <div
+                        className="photo-remove-btn"
                         onClick={(e) => { e.stopPropagation(); setImage(null); setPreview(null); }}
-                        style={{ position: 'absolute', top: '-8px', right: '-8px', background: '#ff4d4d', color: 'white', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}
                       >
                         ✕
                       </div>
                     </div>
                   ) : (
-                    <div style={{ padding: '10px 0' }}>
-                      <div style={{ fontSize: '24px', marginBottom: '8px' }}>📷</div>
-                      <span style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Tap to capture or upload photo</span>
+                    <div className="photo-placeholder">
+                      <div className="photo-placeholder-icon">📷</div>
+                      <span className="photo-placeholder-text">Tap to capture or upload photo</span>
                     </div>
                   )}
-                  <input 
-                    type="file" 
-                    accept="image/*" 
+                  <input
+                    id="photo-input"
+                    type="file"
+                    accept="image/*"
                     onChange={handleImageChange}
-                    style={{ 
-                      position: 'absolute', 
-                      top: 0, 
-                      left: 0, 
-                      width: '100%', 
-                      height: '100%', 
-                      opacity: 0, 
-                      cursor: 'pointer' 
-                    }}
+                    className="photo-input"
+                    aria-label="Upload photo"
+                    title="Upload photo"
+                    placeholder="Upload photo"
                   />
                 </div>
               </div>
 
-              <button 
-                type="submit" 
-                className="primary-button" 
-                style={{ 
-                  width: '100%', 
-                  marginTop: '10px',
-                  opacity: status === "submitting" ? 0.7 : 1,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '10px'
-                }}
+              <button
+                type="submit"
+                className={`primary-button submit-btn${status === "submitting" ? " submit-btn-submitting" : ""}`}
                 disabled={status === "submitting"}
               >
                 {status === "submitting" ? (
                   <>
-                    <motion.div 
+                    <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      style={{ width: '18px', height: '18px', border: '2px solid rgba(15, 23, 42, 0.3)', borderTopColor: '#0f172a', borderRadius: '50%' }}
+                      className="spinner"
                     />
                     Submitting...
                   </>
@@ -310,11 +281,11 @@ export default function RequestForm() {
               </button>
 
               {status === "error" && (
-                <div style={{ background: 'rgba(255, 77, 77, 0.1)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255, 77, 77, 0.2)' }}>
-                  <p style={{ color: '#ff4d4d', fontSize: '13px', textAlign: 'center', fontWeight: '500' }}>
+                <div className="form-error">
+                  <p className="form-error-main">
                     {errorDetail || "Something went wrong. Please try again."}
                   </p>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '11px', textAlign: 'center', marginTop: '4px' }}>
+                  <p className="form-error-sub">
                     Verify your connection and ensure the domain is authorized.
                   </p>
                 </div>
