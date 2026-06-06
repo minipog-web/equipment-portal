@@ -88,9 +88,10 @@ export default function RequestTracker() {
   };
 
   return (
-    <div className="glass-card tracker-card">
-      <div className="tracker-header">
-        <div>
+    <div className="double-bezel-outer tracker-card" style={{ padding: '8px' }}>
+      <div className="double-bezel-inner" style={{ padding: '32px' }}>
+        <div className="tracker-header">
+          <div>
           <h3 className="tracker-title">Live Request Tracker</h3>
           <p className="tracker-subtitle">Monitor real-time repair status, technicians, and case notes.</p>
         </div>
@@ -181,6 +182,7 @@ export default function RequestTracker() {
           </AnimatePresence>
         </div>
       )}
+      </div>
     </div>
   );
 }

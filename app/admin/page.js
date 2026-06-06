@@ -209,45 +209,68 @@ export default function AdminDashboard() {
         </button>
       </header>
 
-      {/* Summary Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px', marginBottom: '48px' }}>
-        <div className="glass-card" style={{ padding: '24px', textAlign: 'center', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%)', boxShadow: '0 1px 10px var(--accent-glow)' }} />
-          <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Open Requests</div>
-          <div style={{ fontSize: '2.8rem', fontWeight: '700', color: 'var(--accent)', fontFamily: 'Outfit, sans-serif', lineHeight: '1.2' }}>{openRequests.length}</div>
-          <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Active maintenance</div>
-        </div>
-        <div className="glass-card" style={{ padding: '24px', textAlign: 'center', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, #10b981 0%, #34d399 100%)', boxShadow: '0 1px 10px rgba(52, 211, 153, 0.3)' }} />
-          <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Resolved</div>
-          <div style={{ fontSize: '2.8rem', fontWeight: '700', color: '#34d399', fontFamily: 'Outfit, sans-serif', lineHeight: '1.2' }}>{completedRequests.length}</div>
-          <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Task completed</div>
-        </div>
-        <div className="glass-card" style={{ padding: '24px', textAlign: 'center', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: completionRate > 80 ? 'linear-gradient(90deg, #10b981 0%, #34d399 100%)' : 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)', boxShadow: completionRate > 80 ? '0 1px 10px rgba(52, 211, 153, 0.3)' : '0 1px 10px rgba(251, 191, 36, 0.3)' }} />
-          <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Completion Rate</div>
-          <div style={{ fontSize: '2.8rem', fontWeight: '700', fontFamily: 'Outfit, sans-serif', lineHeight: '1.2', color: completionRate > 80 ? '#34d399' : '#fbbf24' }}>{completionRate}%</div>
-          <div style={{ 
-            height: '5px', 
-            background: 'rgba(255,255,255,0.03)', 
-            borderRadius: '3px', 
-            marginTop: '12px',
-            overflow: 'hidden',
-            border: '1px solid rgba(255,255,255,0.05)'
-          }}>
-            <div style={{ 
-              width: `${completionRate}%`, 
-              height: '100%', 
-              background: completionRate > 80 ? 'linear-gradient(90deg, #10b981, #34d399)' : 'linear-gradient(90deg, #f59e0b, #fbbf24)',
-              transition: 'width 1s ease-out'
-            }} />
+      {/* Summary Stats - Bento Grid */}
+      <div className="bento-grid">
+        {/* Open Requests (col-4) */}
+        <div className="double-bezel-outer bento-col-4">
+          <div className="double-bezel-inner" style={{ padding: '24px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%)', boxShadow: '0 1px 10px var(--accent-glow)' }} />
+            <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Open Requests</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: '700', color: 'var(--accent)', fontFamily: 'Outfit, sans-serif', lineHeight: '1.2' }}>{openRequests.length}</div>
+            <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Active maintenance</div>
           </div>
         </div>
-        <div className="glass-card" style={{ padding: '24px', textAlign: 'center', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, #8b5cf6 0%, #c084fc 100%)', boxShadow: '0 1px 10px rgba(192, 132, 252, 0.3)' }} />
-          <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Total Volume</div>
-          <div style={{ fontSize: '2.8rem', fontWeight: '700', fontFamily: 'Outfit, sans-serif', color: '#c084fc', lineHeight: '1.2' }}>{requests.length}</div>
-          <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Lifetime requests</div>
+
+        {/* Resolved (col-4) */}
+        <div className="double-bezel-outer bento-col-4">
+          <div className="double-bezel-inner" style={{ padding: '24px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, #10b981 0%, #34d399 100%)', boxShadow: '0 1px 10px rgba(52, 211, 153, 0.3)' }} />
+            <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Resolved</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: '700', color: '#34d399', fontFamily: 'Outfit, sans-serif', lineHeight: '1.2' }}>{completedRequests.length}</div>
+            <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Tasks completed</div>
+          </div>
+        </div>
+
+        {/* Total Volume (col-4) */}
+        <div className="double-bezel-outer bento-col-4">
+          <div className="double-bezel-inner" style={{ padding: '24px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'linear-gradient(90deg, #8b5cf6 0%, #c084fc 100%)', boxShadow: '0 1px 10px rgba(192, 132, 252, 0.3)' }} />
+            <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Total Volume</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: '700', fontFamily: 'Outfit, sans-serif', color: '#c084fc', lineHeight: '1.2' }}>{requests.length}</div>
+            <div style={{ fontSize: '11px', marginTop: '6px', color: 'var(--text-muted)' }}>Lifetime requests</div>
+          </div>
+        </div>
+
+        {/* Completion Rate (col-12) */}
+        <div className="double-bezel-outer bento-col-12">
+          <div className="double-bezel-inner" style={{ padding: '32px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: completionRate > 80 ? 'linear-gradient(90deg, #10b981 0%, #34d399 100%)' : 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)', boxShadow: completionRate > 80 ? '0 1px 10px rgba(52, 211, 153, 0.3)' : '0 1px 10px rgba(251, 191, 36, 0.3)' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+              <div>
+                <div style={{ fontSize: '11px', color: 'var(--text-label)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '600', marginBottom: '8px' }}>Completion Rate</div>
+                <div style={{ fontSize: '3.2rem', fontWeight: '800', fontFamily: 'Outfit, sans-serif', lineHeight: '1', color: completionRate > 80 ? '#34d399' : '#fbbf24' }}>{completionRate}%</div>
+                <div style={{ fontSize: '12px', marginTop: '8px', color: 'var(--text-muted)' }}>Ratio of resolved tickets relative to total reported incidents.</div>
+              </div>
+              <div style={{ flex: '1', maxWidth: '400px', minWidth: '240px' }}>
+                <div style={{ 
+                  height: '8px', 
+                  background: 'rgba(255,255,255,0.02)', 
+                  borderRadius: '6px', 
+                  overflow: 'hidden',
+                  border: '1px solid rgba(255,255,255,0.05)',
+                  position: 'relative'
+                }}>
+                  <div style={{ 
+                    width: `${completionRate}%`, 
+                    height: '100%', 
+                    background: completionRate > 80 ? 'linear-gradient(90deg, #10b981, #34d399)' : 'linear-gradient(90deg, #f59e0b, #fbbf24)',
+                    boxShadow: completionRate > 80 ? '0 0 10px rgba(52, 211, 153, 0.5)' : '0 0 10px rgba(251, 191, 36, 0.5)',
+                    transition: 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -303,8 +326,9 @@ export default function AdminDashboard() {
           <p>Loading requests...</p>
         </div>
       ) : (
-        <div className="glass-card" style={{ overflowX: 'auto', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <div className="double-bezel-outer" style={{ padding: '8px' }}>
+          <div className="double-bezel-inner" style={{ padding: 0, overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ textAlign: 'left', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', background: 'rgba(255,255,255,0.01)' }}>
                 <th style={{ padding: '20px 24px', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-label)', letterSpacing: '0.08em' }}>Equipment</th>
@@ -523,6 +547,7 @@ export default function AdminDashboard() {
               No requests found matching your filters.
             </div>
           )}
+          </div>
         </div>
       )}
     </div>

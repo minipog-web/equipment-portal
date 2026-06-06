@@ -107,8 +107,9 @@ export default function RequestForm() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
-            className="glass-card form-success-card"
+            className="double-bezel-outer"
           >
+            <div className="double-bezel-inner form-success-card">
             <motion.div
               initial={{ scale: 0, rotate: -20 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -130,6 +131,7 @@ export default function RequestForm() {
             >
               Send Another Request
             </button>
+            </div>
           </motion.div>
         ) : (
           <motion.form
@@ -137,10 +139,11 @@ export default function RequestForm() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            className="glass-card form-card"
+            className="double-bezel-outer"
             onSubmit={handleSubmit}
           >
-            <h2 className="form-title">Marano Eye Care Portal</h2>
+            <div className="double-bezel-inner form-card">
+              <h2 className="form-title">Marano Eye Care Portal</h2>
             <p className="form-subtitle">Equipment supply and maintenance reporting system.</p>
 
             <div className="form-divider" />
@@ -267,17 +270,29 @@ export default function RequestForm() {
                 type="submit"
                 className={`primary-button submit-btn${status === "submitting" ? " submit-btn-submitting" : ""}`}
                 disabled={status === "submitting"}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingRight: '8px'
+                }}
               >
-                {status === "submitting" ? (
-                  <>
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="spinner"
-                    />
-                    Submitting...
-                  </>
-                ) : "Submit Request"}
+                <span>{status === "submitting" ? "Submitting..." : "Submit Request"}</span>
+                <span style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  marginLeft: '12px',
+                  transition: 'transform 0.3s ease'
+                }} className="arrow-icon">
+                  {status === "submitting" ? "⏳" : "→"}
+                </span>
               </button>
 
               {status === "error" && (
@@ -290,6 +305,7 @@ export default function RequestForm() {
                   </p>
                 </div>
               )}
+            </div>
             </div>
           </motion.form>
         )}
