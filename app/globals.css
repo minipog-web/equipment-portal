@@ -45,7 +45,11 @@ body {
 
 /* Double-Bezel Component Enclosures - Industrial Console Style */
 .double-bezel-outer {
-  background: #090a0d;
+  background: 
+    linear-gradient(45deg, #12141c 25%, transparent 25%, transparent 75%, #12141c 75%, #12141c),
+    linear-gradient(45deg, #12141c 25%, #07080b 25%, #07080b 75%, #12141c 75%, #12141c);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
   border: 1.5px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 6px;
